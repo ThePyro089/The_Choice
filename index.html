@@ -1,44 +1,66 @@
+```html
 <!DOCTYPE html>
 <html>
 <head>
   <title>Secret 👀</title>
 
   <style>
-body {
-    margin: 0;
-    background-image:
-        linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
-        url('bg.png');
-    background-size: cover;
-    background-position: calc(0px + 0px) center;
-    color: white;
-}
+    body {
+        margin: 0;
+        background-image:
+            linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+            url('bg.png');
+        background-size: cover;
+        background-position: center;
+        color: white;
+    }
 
-.center-box {
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center; /* fixes text alignment */
-}
+    /* center everything */
+    .center-box {
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
 
-.button-row {
-    display: flex;
-    justify-content: center; /* ensures buttons are centered */
-    gap: 200px; /* reduced from 200px for better balance */
-    margin-top: 20px;
-}
+    /* buttons layout */
+    .button-row {
+        display: flex;
+        justify-content: center;
+        gap: 200px;
+        margin-top: 20px;
+    }
 
-button {
-    background: none;
-    border: none;
-    cursor: pointer;
-}
+    /* button base */
+    button {
+        background: none;
+        border: none;
+        cursor: pointer;
+    }
 
-button img {
-    width: 400px;
-}
+    /* button images */
+    button img {
+        width: 400px;
+        transition: transform 0.2s ease, filter 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    /* hover effect */
+    button:hover img {
+        transform: scale(1.1);
+        filter: brightness(1.2);
+        box-shadow: 0 0 20px red;
+    }
+
+    /* optional: dim the other button */
+    .button-row:hover img {
+        filter: brightness(0.7);
+    }
+
+    .button-row button:hover img {
+        filter: brightness(1.2);
+    }
   </style>
 </head>
 
@@ -60,3 +82,4 @@ button img {
   </div>
 </body>
 </html>
+```
