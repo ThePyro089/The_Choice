@@ -24,17 +24,27 @@
         text-align: center;
     }
 
-    /* 🔥 NEW TEXT BOX */
+    /* 🔥 IMPROVED TEXT BOX */
     .text-box {
         background: rgba(0, 0, 0, 0.6);
-        padding: 30px 60px;
+        padding: 50px 80px; /* taller + wider */
         border-radius: 15px;
         border: 2px solid rgba(255, 0, 0, 0.6);
+
         color: white;
-        font-size: 24px;
+        font-size: 22px;
         text-align: center;
+
         backdrop-filter: blur(5px);
         box-shadow: 0 0 25px rgba(255, 0, 0, 0.5);
+
+        max-width: 700px;   /* prevents it from stretching too wide */
+        min-height: 140px;  /* keeps it from looking thin */
+    }
+
+    /* better text spacing */
+    .text-box p {
+        line-height: 1.6;
     }
 
     /* buttons layout */
@@ -42,7 +52,7 @@
         display: flex;
         justify-content: center;
         gap: 200px;
-        margin-top: 20px;
+        margin-top: 30px; /* slightly more breathing room */
     }
 
     /* button base */
@@ -79,9 +89,14 @@
 <body>
   <div class="center-box">
 
-    <!-- 🔥 REPLACED H1 WITH THIS -->
     <div class="text-box">
-      <p>Shadow, it is I, yours truly, Dr. Ivo Eggman Robotnik. Now I can get the confusion, "why did the QR code lead to a website?" or alternitavly I can get the feeling of awe seeing this, but that's not important now. It's your birthday, and below is 2 buttons, you decide your own direction from this point forward where you either turn back or proceed. Choose wisely, we are all counting on you, you may not turn back due to the fact that you only have 1 chance.</p>
+      <p>
+        Shadow, it is I, yours truly, Dr. Ivo Eggman Robotnik. Now I can get the confusion,
+        "why did the QR code lead to a website?" or alternatively I can get the feeling of awe
+        seeing this, but that's not important now. It's your birthday, and below is 2 buttons,
+        you decide your own direction from this point forward where you either turn back or proceed.
+        Choose wisely, we are all counting on you, you may not turn back due to the fact that you only have 1 chance.
+      </p>
     </div>
 
     <div class="button-row">
