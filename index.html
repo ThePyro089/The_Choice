@@ -15,6 +15,18 @@
         font-family: 'Arial Black', Impact, sans-serif;
     }
 
+    /* 🔥 BOOT SCREEN */
+    #boot {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        background: black;
+        color: lime;
+        font-family: monospace;
+        padding: 20px;
+        z-index: 9999;
+    }
+
     /* center everything */
     .center-box {
         height: 100vh;
@@ -66,7 +78,6 @@
         animation: glitchBorder 0.25s infinite;
     }
 
-    /* TEXT stays clean */
     .text-box p {
         position: relative;
         z-index: 2;
@@ -74,7 +85,6 @@
         margin: 0;
     }
 
-    /* 🔥 GLITCH ANIMATION */
     @keyframes glitchBorder {
         0%   { transform: translate(0, 0); opacity: 1; }
         20%  { transform: translate(-3px, 2px); opacity: 0.8; }
@@ -84,7 +94,7 @@
         100% { transform: translate(0, 0); opacity: 1; }
     }
 
-    /* buttons layout */
+    /* buttons */
     .button-row {
         display: flex;
         justify-content: center;
@@ -120,6 +130,10 @@
 </head>
 
 <body>
+
+  <!-- 🔥 BOOT SCREEN -->
+  <div id="boot"></div>
+
   <div class="center-box">
 
     <div class="text-box">
@@ -143,5 +157,33 @@
     </div>
 
   </div>
+
+  <!-- 🔥 BOOT SCRIPT -->
+  <script>
+    const lines = [
+        "Initializing system...",
+        "Loading files...",
+        "Decrypting message...",
+        "Access granted.",
+        "Welcome, Shadow."
+    ];
+
+    let i = 0;
+
+    function showLine() {
+        if (i < lines.length) {
+            document.getElementById("boot").innerHTML += lines[i] + "<br>";
+            i++;
+            setTimeout(showLine, 600);
+        } else {
+            setTimeout(() => {
+                document.getElementById("boot").style.display = "none";
+            }, 1000);
+        }
+    }
+
+    showLine();
+  </script>
+
 </body>
 </html>
