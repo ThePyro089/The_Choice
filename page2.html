@@ -20,7 +20,7 @@
         box-shadow: 0 0 30px red;
     }
 
-    /* 🔥 REMOVE CONTROLS (Chrome/Edge) */
+    /* remove controls */
     video::-webkit-media-controls-volume-slider {
         display: none !important;
     }
@@ -36,19 +36,24 @@
     video::-webkit-media-controls-overflow-button {
         display: none !important;
     }
-
-    video::-webkit-media-controls-download-button {
-        display: none !important;
-    }
   </style>
 </head>
 
 <body>
 
-  <!-- 🔥 AUTOPLAY + NO EXTRA OPTIONS -->
-  <video autoplay muted controls controlsList="nodownload nofullscreen noremoteplayback">
+  <video id="vid" autoplay muted controls controlsList="nodownload nofullscreen noremoteplayback">
     <source src="video.mp4" type="video/mp4">
   </video>
+
+  <script>
+    const vid = document.getElementById("vid");
+
+    // once video starts playing, enable sound at 50%
+    vid.addEventListener("play", () => {
+        vid.muted = false;
+        vid.volume = 0.5; // 🔊 50% volume
+    });
+  </script>
 
 </body>
 </html>
