@@ -25,6 +25,27 @@
         font-family: monospace;
         padding: 20px;
         z-index: 9999;
+
+        opacity: 1;
+        transition: opacity 1.5s ease;
+    }
+
+    #boot.fade-out {
+        opacity: 0;
+    }
+
+    /* blinking cursor */
+    .cursor {
+        display: inline-block;
+        width: 10px;
+        background: lime;
+        margin-left: 5px;
+        animation: blink 1s infinite;
+    }
+
+    @keyframes blink {
+        0%, 50%, 100% { opacity: 1; }
+        25%, 75% { opacity: 0; }
     }
 
     /* center everything */
@@ -56,7 +77,6 @@
         overflow: hidden;
     }
 
-    /* NORMAL BORDER */
     .text-box::before {
         content: "";
         position: absolute;
@@ -66,14 +86,12 @@
         z-index: 1;
     }
 
-    /* GLITCH BORDER */
     .text-box::after {
         content: "";
         position: absolute;
         inset: 0;
         border-radius: 15px;
         border: 2px solid red;
-
         z-index: 1;
         animation: glitchBorder 0.25s infinite;
     }
@@ -132,7 +150,9 @@
 <body>
 
   <!-- 🔥 BOOT SCREEN -->
-  <div id="boot"></div>
+  <div id="boot">
+    <span id="text"></span><span class="cursor"></span>
+  </div>
 
   <div class="center-box">
 
@@ -162,27 +182,46 @@
   <script>
     const lines = [
         "Initializing system...",
-        "Loading files...",
-        "Decrypting message...",
+        "Loading core modules...",
+        "Establishing secure connection...",
+        "Bypassing firewall...",
+        "Decrypting hidden files...",
+        "Injecting access protocol...",
+        "Verifying identity...",
+        "ERROR: Access Denied",
+        "Retrying...",
         "Access granted.",
         "Welcome, Shadow."
     ];
 
-    let i = 0;
+    let lineIndex = 0;
+    let charIndex = 0;
+    const textSpan = document.getElementById("text");
+    const boot = document.getElementById("boot");
 
-    function showLine() {
-        if (i < lines.length) {
-            document.getElementById("boot").innerHTML += lines[i] + "<br>";
-            i++;
-            setTimeout(showLine, 600);
+    function typeLine() {
+        if (lineIndex < lines.length) {
+            if (charIndex < lines[lineIndex].length) {
+                textSpan.innerHTML += lines[lineIndex].charAt(charIndex);
+                charIndex++;
+                setTimeout(typeLine, 30);
+            } else {
+                textSpan.innerHTML += "<br>";
+                lineIndex++;
+                charIndex = 0;
+                setTimeout(typeLine, 400);
+            }
         } else {
             setTimeout(() => {
-                document.getElementById("boot").style.display = "none";
+                boot.classList.add("fade-out");
+                setTimeout(() => {
+                    boot.style.display = "none";
+                }, 1500);
             }, 1000);
         }
     }
 
-    showLine();
+    typeLine();
   </script>
 
 </body>
