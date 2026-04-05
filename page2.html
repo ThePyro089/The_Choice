@@ -20,24 +20,33 @@
         box-shadow: 0 0 30px red;
     }
 
-    /* 🔥 Remove extra controls (Chrome/Edge) */
+    /* 🔥 REMOVE CONTROLS (Chrome/Edge) */
     video::-webkit-media-controls-volume-slider {
-        display: none;
+        display: none !important;
+    }
+
+    video::-webkit-media-controls-mute-button {
+        display: none !important;
     }
 
     video::-webkit-media-controls-fullscreen-button {
-        display: none;
+        display: none !important;
+    }
+
+    video::-webkit-media-controls-overflow-button {
+        display: none !important;
     }
 
     video::-webkit-media-controls-download-button {
-        display: none;
+        display: none !important;
     }
   </style>
 </head>
 
 <body>
 
-  <video autoplay controls controlsList="nodownload nofullscreen noremoteplayback">
+  <!-- 🔥 AUTOPLAY + NO EXTRA OPTIONS -->
+  <video autoplay muted controls controlsList="nodownload nofullscreen noremoteplayback">
     <source src="video.mp4" type="video/mp4">
   </video>
 
