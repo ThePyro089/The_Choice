@@ -11,48 +11,115 @@
         justify-content: center;
         align-items: center;
         height: 100vh;
+        overflow: hidden;
+        color: red;
+        font-family: monospace;
     }
 
+    /* VIDEO */
     video {
         max-width: 90%;
         max-height: 90%;
         border: 3px solid red;
         box-shadow: 0 0 30px red;
+        transition: opacity 1s ease;
     }
 
-    /* remove controls */
-    video::-webkit-media-controls-volume-slider {
-        display: none !important;
+    video.fade-out {
+        opacity: 0;
     }
 
-    video::-webkit-media-controls-mute-button {
-        display: none !important;
+    /* 🔥 SEARCH SCREEN */
+    #searchScreen {
+        position: absolute;
+        opacity: 0;
+        transition: opacity 1s ease;
+        text-align: center;
     }
 
-    video::-webkit-media-controls-fullscreen-button {
-        display: none !important;
+    #searchScreen.show {
+        opacity: 1;
     }
 
-    video::-webkit-media-controls-overflow-button {
-        display: none !important;
+    input {
+        background: black;
+        border: 2px solid red;
+        color: red;
+        padding: 10px;
+        font-size: 20px;
+        width: 300px;
+        outline: none;
+        text-align: center;
+    }
+
+    button {
+        margin-top: 10px;
+        padding: 10px 20px;
+        background: black;
+        border: 2px solid red;
+        color: red;
+        cursor: pointer;
+    }
+
+    #error {
+        margin-top: 10px;
+        color: crimson;
+        opacity: 0;
+    }
+
+    #error.show {
+        opacity: 1;
     }
   </style>
 </head>
 
 <body>
 
-  <video id="vid" autoplay muted controls controlsList="nodownload nofullscreen noremoteplayback">
+  <!-- VIDEO -->
+  <video id="vid" autoplay muted>
     <source src="video.mp4" type="video/mp4">
   </video>
 
+  <!-- 🔥 HIDDEN SEARCH -->
+  <div id="searchScreen">
+    <div>ENTER ACCESS CODE</div>
+    <input id="input" placeholder="enter url...">
+    <br>
+    <button onclick="check()">ENTER</button>
+    <div id="error">ACCESS DENIED</div>
+  </div>
+
   <script>
     const vid = document.getElementById("vid");
+    const search = document.getElementById("searchScreen");
+    const error = document.getElementById("error");
 
-    // once video starts playing, enable sound at 50%
+    // 🔊 enable sound after autoplay
     vid.addEventListener("play", () => {
         vid.muted = false;
-        vid.volume = 0.5; // 🔊 50% volume
+        vid.volume = 0.5;
     });
+
+    // 🎬 when video ends
+    vid.addEventListener("ended", () => {
+        vid.classList.add("fade-out");
+
+        setTimeout(() => {
+            vid.style.display = "none";
+            search.classList.add("show");
+        }, 1000);
+    });
+
+    // 🔐 check input
+    function check() {
+        const value = document.getElementById("input").value.toLowerCase();
+
+        if (value === "shadow") { // 🔥 CHANGE THIS
+            window.location.href = "final.html"; // 🔥 DESTINATION
+        } else {
+            error.classList.add("show");
+        }
+    }
   </script>
 
 </body>
