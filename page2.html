@@ -16,20 +16,25 @@
         font-family: monospace;
     }
 
+    /* 🔥 VIDEO CONTAINER (IMPORTANT) */
+    #videoContainer {
+        position: absolute;
+        transition: opacity 1s ease;
+    }
+
+    #videoContainer.fade-out {
+        opacity: 0;
+    }
+
     /* VIDEO */
     video {
         max-width: 90%;
         max-height: 90%;
         border: 3px solid red;
         box-shadow: 0 0 30px red;
-        transition: opacity 1s ease;
     }
 
-    video.fade-out {
-        opacity: 0;
-    }
-
-    /* 🔥 SEARCH SCREEN */
+    /* 🔥 SEARCH SCREEN (UNDER VIDEO) */
     #searchScreen {
         position: absolute;
         opacity: 0;
@@ -61,26 +66,35 @@
         cursor: pointer;
     }
 
+    /* 🔥 ERROR FLASH */
     #error {
         margin-top: 10px;
         color: crimson;
         opacity: 0;
     }
 
-    #error.show {
-        opacity: 1;
+    #error.flash {
+        animation: flashError 0.3s;
+    }
+
+    @keyframes flashError {
+        0% { opacity: 0; }
+        50% { opacity: 1; }
+        100% { opacity: 0; }
     }
   </style>
 </head>
 
 <body>
 
-  <!-- VIDEO -->
-  <video id="vid" autoplay muted>
-    <source src="video.mp4" type="video/mp4">
-  </video>
+  <!-- 🔥 VIDEO + BORDER WRAPPED -->
+  <div id="videoContainer">
+    <video id="vid" autoplay muted>
+      <source src="video.mp4" type="video/mp4">
+    </video>
+  </div>
 
-  <!-- 🔥 HIDDEN SEARCH -->
+  <!-- 🔥 SEARCH SCREEN (HIDDEN BEHIND) -->
   <div id="searchScreen">
     <div>ENTER ACCESS CODE</div>
     <input id="input" placeholder="enter url...">
@@ -91,6 +105,7 @@
 
   <script>
     const vid = document.getElementById("vid");
+    const container = document.getElementById("videoContainer");
     const search = document.getElementById("searchScreen");
     const error = document.getElementById("error");
 
@@ -102,10 +117,10 @@
 
     // 🎬 when video ends
     vid.addEventListener("ended", () => {
-        vid.classList.add("fade-out");
+        container.classList.add("fade-out");
 
         setTimeout(() => {
-            vid.style.display = "none";
+            container.style.display = "none";
             search.classList.add("show");
         }, 1000);
     });
@@ -117,7 +132,9 @@
         if (value === "shadow") { // 🔥 CHANGE THIS
             window.location.href = "final.html"; // 🔥 DESTINATION
         } else {
-            error.classList.add("show");
+            error.classList.remove("flash");
+            void error.offsetWidth; // reset animation
+            error.classList.add("flash");
         }
     }
   </script>
