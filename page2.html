@@ -97,7 +97,18 @@
   <!-- 🔥 SEARCH SCREEN (HIDDEN BEHIND) -->
   <div id="searchScreen">
     <div>ENTER ACCESS CODE</div>
-    <input id="input" placeholder="enter url...">
+
+    <!-- 🔥 ONLY CHANGE IS HERE -->
+    <input 
+      id="input" 
+      name="access_code_9283"
+      placeholder="enter url..." 
+      autocomplete="off" 
+      autocorrect="off" 
+      autocapitalize="off" 
+      spellcheck="false"
+    >
+
     <br>
     <button onclick="check()">ENTER</button>
     <div id="error">ACCESS DENIED</div>
@@ -133,7 +144,7 @@
             window.location.href = "final.html"; // 🔥 DESTINATION
         } else {
             error.classList.remove("flash");
-            void error.offsetWidth; // reset animation
+            void error.offsetWidth;
             error.classList.add("flash");
         }
     }
