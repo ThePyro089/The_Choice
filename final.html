@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Final</title>
+
+  <style>
+    body {
+        margin: 0;
+        overflow: hidden;
+        background: black;
+    }
+
+    /* 🔥 FULLSCREEN IMAGE */
+    img {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        top: 0;
+        left: 0;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- 🔥 IMAGE -->
+  <img src="final.png">
+
+  <!-- 🔥 AUDIO -->
+  <audio id="audio">
+    <source src="audio.mp3" type="audio/mpeg">
+  </audio>
+
+  <script>
+    const audio = document.getElementById("audio");
+
+    // 🔊 force play with sound
+    window.addEventListener("load", () => {
+        audio.volume = 1; // max volume
+        audio.play().catch(() => {
+            // fallback if browser blocks autoplay
+            document.body.addEventListener("click", () => {
+                audio.play();
+            }, { once: true });
+        });
+    });
+  </script>
+
+</body>
+</html>
