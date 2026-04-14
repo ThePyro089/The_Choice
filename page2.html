@@ -89,7 +89,14 @@
 
   <!-- 🔥 VIDEO + BORDER WRAPPED -->
   <div id="videoContainer">
-    <video id="vid" autoplay muted>
+    <video 
+      id="vid" 
+      autoplay 
+      muted 
+      controls 
+      controlsList="nodownload nofullscreen noremoteplayback"
+      disablePictureInPicture
+    >
       <source src="video.mp4" type="video/mp4">
     </video>
   </div>
@@ -98,7 +105,6 @@
   <div id="searchScreen">
     <div>ENTER ACCESS CODE</div>
 
-    <!-- 🔥 ONLY CHANGE IS HERE -->
     <input 
       id="input" 
       name="access_code_9283"
@@ -140,8 +146,8 @@
     function check() {
         const value = document.getElementById("input").value.toLowerCase();
 
-        if (value === "shadow") { // 🔥 CHANGE THIS
-            window.location.href = "final.html"; // 🔥 DESTINATION
+        if (value === "shadow") {
+            window.location.href = "final.html";
         } else {
             error.classList.remove("flash");
             void error.offsetWidth;
